@@ -1,0 +1,76 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #87CEEB;
+  text-align: center;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #FFF;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+button {
+  font-size: 16px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: #FFF;
+  border: none;
+  border-radius: 5px;
+}
+
+#animation-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+@keyframes evaporate {
+  0% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+
+  100% {
+      transform: translateY(-100px);
+      opacity: 0;
+  }
+}
+
+@keyframes condense {
+  0% {
+      transform: translateY(-100px);
+      opacity: 0;
+  }
+
+  100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+@keyframes raindropFall {
+  0% {
+      transform: translateY(-100px);
+      opacity: 0;
+  }
+
+  100% {
+      transform: translateY(300px);
+      opacity: 1;
+  }
+}
+
+.raindrop {
+  position: absolute;
+  width: 5px;
+  height: 10px;
+  background-color: #3498db;
+  animation: raindropFall 1s linear;
+}
