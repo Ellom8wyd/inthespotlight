@@ -1,5 +1,3 @@
-// script.js
-
 document.addEventListener("DOMContentLoaded", function () {
     const steps = document.querySelectorAll(".step");
 
@@ -13,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     collectWater();
                 } else if (step.id === "evaporation") {
                     removeRain();
+                    stopRainAnimation(); // Stop rain animation during evaporation
                 } else if (step.id === "condensation") {
                     createIndividualRaindrops(); // Update to call function for individual raindrops
                 }
@@ -31,24 +30,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 3000); // Change this value to adjust the interval (in milliseconds) between each step
 
     function createRain() {
-        const container = document.querySelector(".container");
-        const rain = document.createElement("div");
-        rain.classList.add("rain");
-        container.appendChild(rain);
+        for (let i = 0; i < 10; i++) { // Adjust the number of raindrops as needed
+            setTimeout(function () {
+                const raindrop = document.createElement("div");
+                raindrop.classList.add("raindrop");
+                document.body.appendChild(raindrop);
+            }, i * 500); // Adjust the delay between each raindrop appearance
+        }
     }
 
     function collectWater() {
-        const container = document.querySelector(".container");
-        const water = document.createElement("div");
-        water.classList.add("water");
-        container.appendChild(water);
+        const raindrops = document.querySelectorAll(".raindrop");
+        if (raindrops.length > 1) {
+            const water = document.createElement("div");
+            water.classList.add("water");
+            document.body.appendChild(water);
+            raindrops.forEach(function (raindrop) {
+                raindrop.remove();
+            });
+        }
     }
 
     function removeRain() {
-        const rain = document.querySelector(".rain");
-        if (rain) {
-            rain.remove();
-        }
         const water = document.querySelector(".water");
         if (water) {
             water.remove();
@@ -56,22 +59,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function createIndividualRaindrops() {
-        const container = document.querySelector(".container");
-        const containerWidth = container.offsetWidth; // Get the width of the container
-        const raindropCount = 10; // Number of raindrops
-        const minLeft = -50; // Minimum left position (percentage of container width)
-        const maxLeft = 50; // Maximum left position (percentage of container width)
-    
-        for (let i = 0; i < raindropCount; i++) {
-            const raindrop = document.createElement("div");
-            raindrop.classList.add("raindrop");
-    
-            // Generate a random left position within the container width
-            const left = Math.random() * (maxLeft - minLeft) + minLeft;
-            raindrop.style.left = `calc(50% + ${left}%)`;
-    
-            container.appendChild(raindrop);
+        for (let i = 0; i < 10; i++) { // Adjust the number of raindrops as needed
+            setTimeout(function () {
+                const raindrop = document.createElement("div");
+                raindrop.classList.add("raindrop");
+                document.body.appendChild(raindrop);
+            }, i * 500); // Adjust the delay between each raindrop appearance
         }
     }
-    
+
+    function stopRainAnimation() {
+        const raindrops = document.querySelectorAll(".raindrop");
+        raindrops.forEach(function (raindrop) {
+            raindrop.style.animation = "none";
+        });
+    }
 });

@@ -71,13 +71,26 @@ p {
 
 .raindrop {
   position: absolute;
-  width: 20px; /* Adjust width of raindrop image */
-  height: 20px; /* Adjust height of raindrop image */
+  top: calc(random(0, 100vh)); /* Randomize vertical position within viewport */
+  left: calc(random(0, 100vw)); /* Randomize horizontal position within viewport */
+  width: 30px; /* Adjust width of raindrop image */
+  height: 30px; /* Adjust height of raindrop image */
   background-image: url('./icons/raindrop.png'); /* Specify the path to your raindrop image */
   background-size: cover; /* Ensure the image covers the entire element */
   z-index: -1; /* Position the raindrop layer behind other content */
   animation: sway 2s linear infinite alternate; /* Add a swaying animation */
 }
+
+@keyframes sway {
+  from {
+      transform: translateY(0) rotate(-2deg); /* Initial position */
+  }
+  to {
+      transform: translateY(10px) rotate(2deg); /* Final position */
+  }
+}
+
+
 
 @keyframes sway {
   from {
